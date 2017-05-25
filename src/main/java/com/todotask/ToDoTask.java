@@ -61,6 +61,13 @@ public class ToDoTask {
     @Path("/create")
     @Consumes("application/json")
     public Response addTask(Task task){
+    	if(task.getSubject().length() >= 90 || task.getDetail().length()>= 250 ){
+    		return Response.status(Response.Status.BAD_REQUEST).build();
+    	}
+    	if(!(task.getStatus().equals("pending") || task.getStatus().equals("done"))){
+    		System.out.println("tset");
+    		return Response.status(Response.Status.BAD_REQUEST).build();
+    	}
     	task.setSubject(task.getSubject());
     	task.setDetail(task.getDetail());
     	task.setStatus(task.getStatus());
@@ -75,6 +82,13 @@ public class ToDoTask {
     @Consumes("application/json")
     public Response updateTask(@PathParam("id") int id, Task task){
     	if(id<0){
+    		return Response.status(Response.Status.BAD_REQUEST).build();
+    	}
+    	if(task.getSubject().length() >= 90 || task.getDetail().length()>= 250 ){
+    		return Response.status(Response.Status.BAD_REQUEST).build();
+    	}
+    	if(!(task.getStatus().equals("pending") || task.getStatus().equals("done"))){
+    		System.out.println("tset");
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
         TaskDAO dao = new TaskDAO();
@@ -93,6 +107,10 @@ public class ToDoTask {
     @Consumes("application/json")
     public Response setStatus(@PathParam("id") int id, Task task){
     	if(id<0){
+    		return Response.status(Response.Status.BAD_REQUEST).build();
+    	}
+    	if(!(task.getStatus().equals("pending") || task.getStatus().equals("done"))){
+    		System.out.println("tset");
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
         TaskDAO dao = new TaskDAO();
