@@ -18,23 +18,10 @@ import javax.ws.rs.core.Response;
 import com.todotask.dao.TaskDAO;
 import com.todotask.model.Task;
 
-/**
- * Root resource (exposed at "myresource" path)
- */
+
 @Path("todotask")
 public class ToDoTask {
 
-    /**
-     * Method handling HTTP GET requests. The returned object will be sent
-     * to the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
-     */
-//    @GET
-//    @Produces(MediaType.TEXT_PLAIN)
-//    public String getIt() {
-//        return "Got it!";
-//    }
     
     @GET
     @Produces("application/json")
@@ -65,7 +52,6 @@ public class ToDoTask {
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     	if(!(task.getStatus().equals("pending") || task.getStatus().equals("done"))){
-    		System.out.println("tset");
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     	task.setSubject(task.getSubject());
@@ -88,7 +74,6 @@ public class ToDoTask {
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     	if(!(task.getStatus().equals("pending") || task.getStatus().equals("done"))){
-    		System.out.println("tset");
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
         TaskDAO dao = new TaskDAO();
@@ -110,7 +95,6 @@ public class ToDoTask {
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
     	if(!(task.getStatus().equals("pending") || task.getStatus().equals("done"))){
-    		System.out.println("tset");
     		return Response.status(Response.Status.BAD_REQUEST).build();
     	}
         TaskDAO dao = new TaskDAO();
